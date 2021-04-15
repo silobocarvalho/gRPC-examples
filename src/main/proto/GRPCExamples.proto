@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.zup.ot2";
+option java_outer_classname = "GRPCExamples";
+option objc_class_prefix = "HLW";
+
+package br.com.zup.ot2;
+
+import "google/protobuf/timestamp.proto";
+
+service EmployeeService {
+  rpc add (EmployeeRequest) returns (EmployeeResponse) {}
+}
+
+enum Role{
+    DEV = 0;
+    QA = 1;
+    MANAGER = 2;
+}
+
+message EmployeeRequest {
+  string name = 1;
+  string cpf = 2;
+  bool active = 3;
+  double salary = 4;
+  Role role = 5;
+
+  message Address{
+    string street = 1;
+    string zipcode = 2;
+  }
+
+  repeated Address address = 6; //word repeated allow a list of address
+  }
+
+message EmployeeResponse {
+  string name = 1;
+  google.protobuf.Timestamp createdAt = 2;
+}
